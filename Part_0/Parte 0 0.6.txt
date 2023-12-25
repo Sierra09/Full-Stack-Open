@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant Usuario
+    participant Navegador
+    participant SPA
+    participant Servidor
+    participant API
+
+    activate Usuario
+    Usuario->>Navegador: Interactúa con la SPA para crear una nueva nota
+    activate Navegador
+    Navegador->>SPA: Inicia la creación de una nueva nota
+    activate SPA
+    SPA->>SPA: Interfaz de usuario para ingresar la nueva nota
+    SPA-->>Navegador: Actualiza la interfaz de usuario
+    deactivate SPA
+
+    Navegador->>API: Envía solicitud POST para crear una nueva nota
+    activate API
+    API->>Servidor: Solicitud para crear una nueva nota
+    activate Servidor
+    Servidor-->>API: Procesa la solicitud de creación de nota
+    deactivate Servidor
+    API-->>Navegador: Respuesta de la creación de nota (ID de la nueva nota)
+    deactivate API
+
+    Navegador->>SPA: Actualiza la interfaz de usuario con la nueva nota creada
+    activate SPA
+    SPA-->>Navegador: Interfaz de usuario actualizada con la nueva nota
+    deactivate SPA
+    deactivate Navegador
+    deactivate Usuario
